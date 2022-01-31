@@ -1,18 +1,37 @@
-#CP1895 DEMO
+from shapes import Circle, Rectangle
+import pickle
 
-# This is a sample Python script.
+def read_bin(shapes_list):
+    with open("shapes_bin.bin", "rb") as file:
+        loaded_file = pickle.load(file)
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+    return loaded_file
+
+def write_bin(shapes_list):
+    with open("shapes_bin.bin", "wb") as file:
+        pickle.dump(shapes_list,file)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+def main():
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    circle1 = Circle(3.00, (0, 0))
+    circle2 = Circle(5.00, (0,0))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    rec1 = Rectangle(2.00, 4.00, (5, 3))
+    rec2 = Rectangle(3.00, 5.00, (5, 10))
+
+    shapes_list = []
+    shapes_list.append(circle1)
+    shapes_list.append(circle2)
+    shapes_list.append(rec1)
+    shapes_list.append(rec2)
+
+    write_bin(shapes_list)
+    loaded_file = read_bin(shapes_list)
+
+    print(loaded_file)
+
+if __name__ == "__main__":
+    main()
